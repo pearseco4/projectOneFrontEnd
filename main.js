@@ -6,10 +6,7 @@ const select2 = document.getElementById("defFouls");
 const select3 = document.getElementById("unitCharged");
 const select4 = document.getElementById("penYards");
 const select5 = document.getElementById("playResult");
-// //assign problem field
-// let problemField = document.getElementById("problemField");
-
-
+let questionIndex = 0;
 
 //Array: fouls that BOTH offense and defense are eligible to commit 
 let bothFouls = [
@@ -37,12 +34,49 @@ let playResult = [
 ];
 //Array: scenario prompts 
 let scenarios = [
-    "Middle Linebacker crosses the nuetral line, causing the Left Guard to react before the Quarterback snapped the ball", "Right Tackle grabs an Edge Rusher approaching the Quarterback", "Quarterback fails to initiate the play (snap the ball) before the play clock expired", "The Quarterback, in an attempt to avoid losing yards from a sack, throws a forward pass without a realistic chance of a receiver completing the pass", "The Left tackle grabs and holds an approaching outside linebacker", "Edge rusher runs into Quarterback after the ball was thrown", "Outside Linebacker performs a clean sack on the quarterback, but lands with their full bodyweight on the passer", "A Wide Receiver taunts the oposing team's bench players after scoring a touchdown", "the right gaurd flinches at the outside linebacker before the quarterback snaps the ball", "The Nosegaurd crosses the nuetral zone and makes contact with the Center before the ball is snapped", "The Running Back grabs the face protection of an oposing player while carrying the football", "The Cornerback hooks and holds a Wide Receiver's arm after the Quarterback releases the ball"
+    "Middle Linebacker crosses the nuetral line, causing the Left Guard to react before the Quarterback snapped the ball. The foul occured in the field of play", "Right Tackle grabs an Edge Rusher approaching the Quarterback. The foul occured ", "Quarterback fails to initiate the play before the play clock expired. The foul occured ", "The Quarterback, in an attempt to avoid losing yards from a sack, throws a forward pass without a realistic chance of a receiver completing the pass. The play occured ", "The Left tackle grabs and holds an approaching outside linebacker. The foul occured ", "Edge rusher runs into Quarterback after the ball was thrown. The foul occured ", "Outside Linebacker performs a clean sack on the quarterback, but lands with their full bodyweight on the passer. The foul occured ", "A Wide Receiver taunts the oposing team's bench players after scoring a touchdown. The foul occured ", "the right gaurd flinches at the approaching outside linebacker before the quarterback snaps the ball. The foul occured ", "The Nosegaurd crosses the nuetral zone and makes contact with the Center before the ball is snapped. The foul occured ", "The Running Back grabs the face protection of an oposing player while carrying the football. The foul occured ", "The Cornerback hooks and holds a Wide Receiver's arm after the Quarterback releases the ball. The foul occured "
 ];
+let scenarios = [
+    {
+        question: "Middle Linebacker crosses the nuetral line, causing the Left Guard to react before the Quarterback snapped the ball. The foul occured in the field of play",
+
+        bothFoul: "N/A",
+        offenseFoul: "N/A",
+        defenseFoul: "Neutral Zone Infraction",
+        unit: "Defense",
+        penalty: "",
+        result: ,
+    }
+
+    {"Right Tackle grabs an Edge Rusher approaching the Quarterback. The foul occured "} 
+    
+    {"Quarterback fails to initiate the play before the play clock expired. The foul occured "}
+
+    {"The Quarterback, in an attempt to avoid losing yards from a sack, throws a forward pass without a realistic chance of a receiver completing the pass. The play occured "} 
+    
+    {"The Left tackle grabs and holds an approaching outside linebacker. The foul occured "} 
+    
+    {"Edge rusher runs into Quarterback after the ball was thrown. The foul occured "} 
+    
+    {"Outside Linebacker performs a clean sack on the quarterback, but lands with their full bodyweight on the passer. The foul occured "},
+
+    {"A Wide Receiver taunts the oposing team's bench players after scoring a touchdown. The foul occured "}, 
+    
+    {"the right gaurd flinches at the approaching outside linebacker before the quarterback snaps the ball. The foul occured "}, 
+    
+    {"The Nosegaurd crosses the nuetral zone and makes contact with the Center before the ball is snapped. The foul occured "}, 
+    
+    {"The Running Back grabs the face protection of an oposing player while carrying the football. The foul occured "}, 
+    
+    {"The Cornerback hooks and holds a Wide Receiver's arm after the Quarterback releases the ball. The foul occured "}
+];
+
+// Shuffle Original Array of Scenarios
+scenarios = scenarios.sort((a, b) => 0.5 - Math.random())
 
 //Array: spot of the foul
 let playingArea = [
-    "in the Field of Play", "in their own endzone", "in the oponent's endzone"
+    "It's 1st down", "It's 2nd down", "It's 3rd down", "It's 4th down"
 ]
 
 //forEach loop! BOTH FOULS
@@ -65,7 +99,7 @@ for(let i = 0; i < offFouls.length; i++) {
     let off = offFouls[i];
     //assign current element in the loop to a letiable called 'off'
     // console.log(off);
-     //console log for debugging
+    //console log for debugging
     let elOff = document.createElement("option");
     //create an <option> element called 'elOff'
     elOff.textContent = off;
@@ -82,7 +116,7 @@ for(let i = 0; i < defFouls.length; i++) {
     let def = defFouls[i];
     //assign current element in the loop to a letiable called 'def'
     // console.log(def);
-     //console log for debugging
+    //console log for debugging
     let elDef = document.createElement("option");
     //create an <option> element called 'elDef'
     elDef.textContent = def;
@@ -99,7 +133,7 @@ for(let i = 0; i < unit.length; i++) {
     let teamUnit = unit[i];
     //assign current element in the loop to a letiable called 'off'
     // console.log(teamUnit);
-     //console log for debugging
+    //console log for debugging
     let elUnit = document.createElement("option");
     //create an <option> element called 'elOff'
     elUnit.textContent = teamUnit;
@@ -116,7 +150,7 @@ for(let i = 0; i < penYards.length; i++) {
     let pen = penYards[i];
     //assign current element in the loop to a letiable called 'off'
     // console.log(pen);
-     //console log for debugging
+    //console log for debugging
     let elPen = document.createElement("option");
     //create an <option> element called 'elOff'
     elPen.textContent = pen;
@@ -133,7 +167,7 @@ for(let i = 0; i < playResult.length; i++) {
     let result = playResult[i];
     //assign current element in the loop to a letiable called 'result'
     // console.log(result);
-     //console log for debugging
+    //console log for debugging
     let elRes = document.createElement("option");
     //create an <option> element called 'elOff'
     elRes.textContent = result;
@@ -144,23 +178,26 @@ for(let i = 0; i < playResult.length; i++) {
     //append the current value in the loop 
 }
 
-// forEach loop! Populating the output field 
-// for (let i = 0; i < scenarios.length; i++) {
-//     //iterate through the array
-//     let newQuestion = document.createElement("p");
-//     //create a (<p>) paragraph element called newQuestion
-//     newQuestion.textContent = scenarios[i];
-//     //set the text content of newQuestion the current element in the scenarios array
-//     problemField.appendChild(newQuestion);
-//     //append the current value in the loop
-//     shuffle();
+//Randomize the 'scenarios' array and return an element.
+// let random1 = scenarios[(Math.floor(Math.random() * (scenarios.length)))];
+// console.log(random1);
+//Randomize the 'playingArea' array and return an element
+// let random2 = playingArea[(Math.floor(Math.random() * (playingArea.length)))];
+// console.log(random2);
 
-//   }
 
-// let index = 0 //increment index later 
+//assign question button field
+let questBtn = document.getElementById("questBtn");
+//assign output field
+let outField = document.querySelector("h1")
 
-// function shuffle() {
-//     scenarios = scenarios.sort((a, b) => 0.5 - Math.random());
-// }
-// shuffle()
+questBtn.addEventListener('click', () => {
+    questionIndex++
+    updateUI()
+})
 
+function updateUI(){
+    outField.innerText = scenarios[questionIndex]; // UPDATE: When you change scenarios from string to object => scenarios[questionIndex].question
+}
+
+updateUI()
