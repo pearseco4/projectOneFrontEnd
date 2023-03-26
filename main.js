@@ -26,58 +26,62 @@ let unit = [
 ];
 //Array: possible penalties
 let penYards = [
-    "5 yards", "10 yards", "15 yards", "Ball is placed at spot of the foul", "Safety", "Ball is placed half the distance to the goalline"
+    "5 yards", "10 yards", "15 yards", "Ball is placed at spot of the foul", "Safety", "Ball is placed half the distance to the goal line"
 ];
 //Array: result of the play 
 let playResult = [
     "Automatic First Down", "First Down", "Second Down", "Third Down", "Fourth Down", "Repeat First Down", "Repeat Second Down", "Repeat Third Down", "Repeat Fourth Down"
 ];
+//Array: current down 
+let curDown = [
+    "It's 1st down,", "It's 2nd down,", "It's 3rd down,", "It's fourth down,"
+];
 //Array: scenario prompts 
 let scenarios = [
-    "Middle Linebacker crosses the nuetral line, causing the Left Guard to react before the Quarterback snapped the ball. The foul occured in the field of play", "Right Tackle grabs an Edge Rusher approaching the Quarterback. The foul occured ", "Quarterback fails to initiate the play before the play clock expired. The foul occured ", "The Quarterback, in an attempt to avoid losing yards from a sack, throws a forward pass without a realistic chance of a receiver completing the pass. The play occured ", "The Left tackle grabs and holds an approaching outside linebacker. The foul occured ", "Edge rusher runs into Quarterback after the ball was thrown. The foul occured ", "Outside Linebacker performs a clean sack on the quarterback, but lands with their full bodyweight on the passer. The foul occured ", "A Wide Receiver taunts the oposing team's bench players after scoring a touchdown. The foul occured ", "the right gaurd flinches at the approaching outside linebacker before the quarterback snaps the ball. The foul occured ", "The Nosegaurd crosses the nuetral zone and makes contact with the Center before the ball is snapped. The foul occured ", "The Running Back grabs the face protection of an oposing player while carrying the football. The foul occured ", "The Cornerback hooks and holds a Wide Receiver's arm after the Quarterback releases the ball. The foul occured "
+    "Middle Linebacker crosses the nuetral line, causing the Left Guard to react before the Quarterback snapped the ball. The foul occured in the field of play", "Right Tackle grabs an Edge Rusher approaching the Quarterback. The foul occured ", "Quarterback fails to initiate the play before the play clock expired. The foul occured ", "The Quarterback, in an attempt to avoid losing yards from a sack, throws a forward pass without a realistic chance of a receiver completing the pass. The play occured ", "The Left tackle grabs and holds an approaching outside linebacker. The foul occured ", "Edge rusher runs into Quarterback after the ball was thrown. The foul occured ", "Outside Linebacker performs a clean sack on the quarterback, but lands with their full bodyweight on the passer. The foul occured ", "A Wide Receiver taunts the oposing team's bench players after scoring a touchdown.", "the right gaurd flinches at the approaching outside linebacker before the quarterback snaps the ball. The foul occured ", "The Nosegaurd crosses the nuetral zone and makes contact with the Center before the ball is snapped. The foul occured ", "The Running Back grabs the face protection of an oposing player while carrying the football. The foul occured ", "The Cornerback hooks and holds a Wide Receiver's arm after the Quarterback releases the ball. The foul occured "
 ];
-let scenarios = [
-    {
-        question: "Middle Linebacker crosses the nuetral line, causing the Left Guard to react before the Quarterback snapped the ball. The foul occured in the field of play",
+// let scenarios = [
+//     {
+//         question: "Middle Linebacker crosses the nuetral line, causing the Left Guard to react before the Quarterback snapped the ball. The foul occured in the field of play",
 
-        bothFoul: "N/A",
-        offenseFoul: "N/A",
-        defenseFoul: "Neutral Zone Infraction",
-        unit: "Defense",
-        penalty: "",
-        result: ,
-    }
+//         bothFoul: "N/A",
+//         offenseFoul: "N/A",
+//         defenseFoul: "Neutral Zone Infraction",
+//         unit: "Defense",
+//         penalty: "5 yards",
+//         result: "Repeat ",
+//     }
 
-    {"Right Tackle grabs an Edge Rusher approaching the Quarterback. The foul occured "} 
+//     {"Right Tackle grabs an Edge Rusher approaching the Quarterback. The foul occured "} 
     
-    {"Quarterback fails to initiate the play before the play clock expired. The foul occured "}
+//     {"Quarterback fails to initiate the play before the play clock expired. The foul occured "}
 
-    {"The Quarterback, in an attempt to avoid losing yards from a sack, throws a forward pass without a realistic chance of a receiver completing the pass. The play occured "} 
+//     {"The Quarterback, in an attempt to avoid losing yards from a sack, throws a forward pass without a realistic chance of a receiver completing the pass. The play occured "} 
     
-    {"The Left tackle grabs and holds an approaching outside linebacker. The foul occured "} 
+//     {"The Left tackle grabs and holds an approaching outside linebacker. The foul occured "} 
     
-    {"Edge rusher runs into Quarterback after the ball was thrown. The foul occured "} 
+//     {"Edge rusher runs into Quarterback after the ball was thrown. The foul occured "} 
     
-    {"Outside Linebacker performs a clean sack on the quarterback, but lands with their full bodyweight on the passer. The foul occured "},
+//     {"Outside Linebacker performs a clean sack on the quarterback, but lands with their full bodyweight on the passer. The foul occured "},
 
-    {"A Wide Receiver taunts the oposing team's bench players after scoring a touchdown. The foul occured "}, 
+//     {"A Wide Receiver taunts the oposing team's bench players after scoring a touchdown."}, 
     
-    {"the right gaurd flinches at the approaching outside linebacker before the quarterback snaps the ball. The foul occured "}, 
+//     {"the right gaurd flinches at the approaching outside linebacker before the quarterback snaps the ball. The foul occured "}, 
     
-    {"The Nosegaurd crosses the nuetral zone and makes contact with the Center before the ball is snapped. The foul occured "}, 
+//     {"The Nosegaurd crosses the nuetral zone and makes contact with the Center before the ball is snapped. The foul occured "}, 
     
-    {"The Running Back grabs the face protection of an oposing player while carrying the football. The foul occured "}, 
+//     {"The Running Back grabs the face protection of an oposing player while carrying the football. The foul occured "}, 
     
-    {"The Cornerback hooks and holds a Wide Receiver's arm after the Quarterback releases the ball. The foul occured "}
-];
+//     {"The Cornerback hooks and holds a Wide Receiver's arm after the Quarterback releases the ball. The foul occured "}
+// ];
 
 // Shuffle Original Array of Scenarios
 scenarios = scenarios.sort((a, b) => 0.5 - Math.random())
 
-//Array: spot of the foul
-let playingArea = [
-    "It's 1st down", "It's 2nd down", "It's 3rd down", "It's 4th down"
-]
+//shuffle array of curDowns (current down)
+curDown = curDown.sort((a, b) => 0.5 - Math.random())
+//console.log for debugging
+console.log(curDown)
 
 //forEach loop! BOTH FOULS
 for(let i = 0; i < bothFouls.length; i++) {
@@ -165,7 +169,7 @@ for(let i = 0; i < penYards.length; i++) {
 for(let i = 0; i < playResult.length; i++) {
     //iterate through the array
     let result = playResult[i];
-    //assign current element in the loop to a letiable called 'result'
+    //assign current element in the loop to a variable called 'result'
     // console.log(result);
     //console log for debugging
     let elRes = document.createElement("option");
@@ -178,18 +182,12 @@ for(let i = 0; i < playResult.length; i++) {
     //append the current value in the loop 
 }
 
-//Randomize the 'scenarios' array and return an element.
-// let random1 = scenarios[(Math.floor(Math.random() * (scenarios.length)))];
-// console.log(random1);
-//Randomize the 'playingArea' array and return an element
-// let random2 = playingArea[(Math.floor(Math.random() * (playingArea.length)))];
-// console.log(random2);
-
-
 //assign question button field
 let questBtn = document.getElementById("questBtn");
 //assign output field
-let outField = document.querySelector("h1")
+let outField = document.querySelector("#output");
+
+let curField = document.querySelector("#curOutput");
 
 questBtn.addEventListener('click', () => {
     questionIndex++
@@ -197,7 +195,9 @@ questBtn.addEventListener('click', () => {
 })
 
 function updateUI(){
+    curField.innerText = curDown
     outField.innerText = scenarios[questionIndex]; // UPDATE: When you change scenarios from string to object => scenarios[questionIndex].question
+    
 }
 
 updateUI()
