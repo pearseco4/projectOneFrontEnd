@@ -10,7 +10,7 @@ let questionIndex = 0;
 
 //Array: fouls that BOTH offense and defense are eligible to commit 
 let bothFouls = [
-    "Offside", "Pass Interference", "Holding", "Illegal Block", "Facemask", "Horse Collar", "Unnecessary Roughness", "Unsportsmanlike Conduct", "N/A"
+    "Offside", "Pass Interference", "Holding", "Illegal Block", "Face Mask", "Horse collar", "Unnecessary Roughness", "Unsportsmanlike Conduct", "Taunting", "N/A"
 ];
 //Array: fouls that ONLY offense is eligible to commit
 let offFouls = [
@@ -26,59 +26,198 @@ let unit = [
 ];
 //Array: possible penalties
 let penYards = [
-    "5 yards", "10 yards", "15 yards", "Ball is placed at spot of the foul", "Safety", "Ball is placed half the distance to the goal line"
+    "5 yards", "10 yards", "15 yards", "Ball is placed at spot of the foul", "Ball is placed half the distance to the goal line", "Foul occured in the end zone", "Ball is placed at the 1 yard line"
 ];
 //Array: result of the play 
 let playResult = [
-    "Automatic First Down", "First Down", "Second Down", "Third Down", "Fourth Down", "Repeat First Down", "Repeat Second Down", "Repeat Third Down", "Repeat Fourth Down"
+    "Automatic first Down", "Repeat current down", "Loss of down", "Safety", "Penalty enforced on kickoff", "Touchdown"
 ];
 //Array: current down 
 let curDown = [
-    "It's 1st down,", "It's 2nd down,", "It's 3rd down,", "It's fourth down,"
+    "It's first down,", "It's second down,", "It's third down,", "It's fourth down,"
 ];
-//Array: scenario prompts 
-let scenarios = [
-    "Middle Linebacker crosses the nuetral line, causing the Left Guard to react before the Quarterback snapped the ball. The foul occured in the field of play", "Right Tackle grabs an Edge Rusher approaching the Quarterback. The foul occured ", "Quarterback fails to initiate the play before the play clock expired. The foul occured ", "The Quarterback, in an attempt to avoid losing yards from a sack, throws a forward pass without a realistic chance of a receiver completing the pass. The play occured ", "The Left tackle grabs and holds an approaching outside linebacker. The foul occured ", "Edge rusher runs into Quarterback after the ball was thrown. The foul occured ", "Outside Linebacker performs a clean sack on the quarterback, but lands with their full bodyweight on the passer. The foul occured ", "A Wide Receiver taunts the oposing team's bench players after scoring a touchdown.", "the right gaurd flinches at the approaching outside linebacker before the quarterback snaps the ball. The foul occured ", "The Nosegaurd crosses the nuetral zone and makes contact with the Center before the ball is snapped. The foul occured ", "The Running Back grabs the face protection of an oposing player while carrying the football. The foul occured ", "The Cornerback hooks and holds a Wide Receiver's arm after the Quarterback releases the ball. The foul occured "
-];
+// //Array: scenario prompts 
 // let scenarios = [
-//     {
-//         question: "Middle Linebacker crosses the nuetral line, causing the Left Guard to react before the Quarterback snapped the ball. The foul occured in the field of play",
-
-//         bothFoul: "N/A",
-//         offenseFoul: "N/A",
-//         defenseFoul: "Neutral Zone Infraction",
-//         unit: "Defense",
-//         penalty: "5 yards",
-//         result: "Repeat ",
-//     }
-
-//     {"Right Tackle grabs an Edge Rusher approaching the Quarterback. The foul occured "} 
-    
-//     {"Quarterback fails to initiate the play before the play clock expired. The foul occured "}
-
-//     {"The Quarterback, in an attempt to avoid losing yards from a sack, throws a forward pass without a realistic chance of a receiver completing the pass. The play occured "} 
-    
-//     {"The Left tackle grabs and holds an approaching outside linebacker. The foul occured "} 
-    
-//     {"Edge rusher runs into Quarterback after the ball was thrown. The foul occured "} 
-    
-//     {"Outside Linebacker performs a clean sack on the quarterback, but lands with their full bodyweight on the passer. The foul occured "},
-
-//     {"A Wide Receiver taunts the oposing team's bench players after scoring a touchdown."}, 
-    
-//     {"the right gaurd flinches at the approaching outside linebacker before the quarterback snaps the ball. The foul occured "}, 
-    
-//     {"The Nosegaurd crosses the nuetral zone and makes contact with the Center before the ball is snapped. The foul occured "}, 
-    
-//     {"The Running Back grabs the face protection of an oposing player while carrying the football. The foul occured "}, 
-    
-//     {"The Cornerback hooks and holds a Wide Receiver's arm after the Quarterback releases the ball. The foul occured "}
+//     "Middle Linebacker crosses the nuetral line, causing the Left Guard to react before the Quarterback snapped the ball. The foul occured in the field of play", "Right Tackle grabs an Edge Rusher approaching the Quarterback. The foul occured ", "Quarterback fails to initiate the play before the play clock expired. The foul occured ", "The Quarterback, in an attempt to avoid losing yards from a sack, throws a forward pass without a realistic chance of a receiver completing the pass. The play occured ", "The Left tackle grabs and holds an approaching outside linebacker. The foul occured ", "Edge rusher runs into Quarterback after the ball was thrown. The foul occured ", "Outside Linebacker performs a clean sack on the quarterback, but lands with their full bodyweight on the passer. The foul occured ", "A Wide Receiver taunts the oposing team's bench players after scoring a touchdown.", "the right gaurd flinches at the approaching outside linebacker before the quarterback snaps the ball. The foul occured ", "The Nosegaurd crosses the nuetral zone and makes contact with the Center before the ball is snapped. The foul occured ", "The Running Back grabs the face protection of an oposing player while carrying the football. The foul occured ", "The Cornerback hooks and holds a Wide Receiver's arm after the Quarterback releases the ball. The foul occured "
 // ];
+let scenarios = [
+    {
+    question: "Middle Linebacker crosses the nuetral line, causing the Left Guard to react before the Quarterback snapped the ball. The foul occured in the field of play",
+    bothFoul: "N/A",
+    offenseFoul: "N/A",
+    defenseFoul: "Neutral Zone Infraction",
+    unit: "Defense",
+    penalty: "5 yards",
+    result: "Repeat Current Down",
+    },
+    {
+    question: "Right Tackle grabs an Edge Rusher approaching the Quarterback. The foul occured in the field of play", 
+    bothFoul: "Holding",
+    offenseFoul: "N/A",
+    defenseFoul: "N/A",
+    unit: "Offense",
+    penalty: "10 yards",
+    result: "Repeat Current Down",
+    },
+    {
+    question: "Right Tackle grabs an Edge Rusher approaching the Quarterback. The foul occured in the End Zone", 
+    bothFoul: "Holding",
+    offenseFoul: "N/A",
+    defenseFoul: "N/A",
+    unit: "Offense",
+    penalty: "Foul occured in the End Zone",
+    result: "Safety",
+    },
+    {
+    question: "Quarterback fails to initiate the play before the play clock expired. The foul occured in the field of play.",
+    bothFoul: "N/A",
+    offenseFoul: "False Start",
+    defenseFoul: "N/A",
+    unit: "Offense",
+    penalty: "5 yards",
+    result: "Repeat Current Down",
+    },
+    {
+    question:"The Quarterback, in an attempt to avoid losing yards from a sack, throws a forward pass without a realistic chance of a receiver completing the pass. The play occured in the field of play.",
+    bothFoul: "N/A",
+    offenseFoul: "Intentional Grounding",
+    defenseFoul: "N/A",
+    unit: "Offense",
+    penalty: "10 yards",
+    result: "Loss of down",
+    },
+    {
+    question:"The Quarterback, in an attempt to avoid losing yards from a sack, throws a forward pass without a realistic chance of a receiver completing the pass. The play occured in the End Zone.",
+    bothFoul: "N/A",
+    offenseFoul: "N/A",
+    defenseFoul: "Intentional Grounding",
+    unit: "Offense",
+    penalty: "Foul occured in the End Zone",
+    result: "Safety",
+    },
+    {
+    question: "The Left Tackle grabs and holds an approaching Outside Linebacker. The foul occured in the field of play.",
+    bothFoul: "Holding",
+    offenseFoul: "N/A",
+    defenseFoul: "N/A",
+    unit: "Offense",
+    penalty: "10 yards",
+    result: "Repeat Current Down",
+    },     
+    {
+    question: "The Left Tackle grabs and holds an approaching Outside Linebacker. The foul occured in the end zone.",
+    bothFoul: "Holding",
+    offenseFoul: "N/A",
+    defenseFoul: "N/A",
+    unit: "Offense",
+    penalty: "Fould occured in the end zone",
+    result: "Safety",
+    }, 
+    {
+    question:"Edge rusher runs into Quarterback after the ball was thrown. The foul occured in the field of play.",
+    bothFoul: "N/A",
+    offenseFoul: "N/A",
+    defenseFoul: "Roughing the passer",
+    unit: "Defense",
+    penalty: "15 yards",
+    result: "Automatic first down",
+    },    
+    {
+    question:"Edge rusher runs into Quarterback after the ball was thrown. The foul occured in the end zone.",
+    bothFoul: "N/A",
+    offenseFoul: "N/A",
+    defenseFoul: "Rouging the passer",
+    unit: "Defense",
+    penalty: "15 yards",
+    result: "Automatic first down",
+    },     
+    {
+    question:"Outside Linebacker performs a clean sack on the quarterback, but lands with their full bodyweight on the passer. The foul occured in the field of play.",
+    bothFoul: "N/A",
+    offenseFoul: "N/A",
+    defenseFoul: "Roughing the passer",
+    unit: "Defense",
+    penalty: "15 yards",
+    result: "Automatic first down",
+    },
+    {
+    question:"Outside Linebacker performs a clean sack on the quarterback, but lands with their full bodyweight on the passer. The foul occured in the End Zone.",
+    bothFoul: "N/A",
+    offenseFoul: "N/A",
+    defenseFoul: "Roughing the passer",
+    unit: "Defense",
+    penalty: "15 yards",
+    result: "Automatic first down",
+    },
+    {
+    question:"A Wide Receiver taunts the oposing team's bench players after scoring a touchdown.",
+    bothFoul: "Taunting",
+    offenseFoul: "N/A",
+    defenseFoul: "N/A",
+    unit: "Offense",
+    penalty: "15 yards, enforced on Kickoff",
+    result: "Touchdown",
+    },
+    {
+    question:"the right gaurd flinches at the approaching outside linebacker before the quarterback initiates the play. The foul occured in the field of play.",
+    bothFoul: "N/A",
+    offenseFoul: "N/A",
+    defenseFoul: "False Start",
+    unit: "Offense",
+    penalty: "5 yards",
+    result: "Repeat Current Down",
+    }, 
+    {
+    question:"The Nosegaurd crosses the nuetral zone and makes contact with the Center before the ball is snapped. The foul occured in the field of play.",
+    bothFoul: "N/A",
+    offenseFoul: "N/A",
+    defenseFoul: "Encroachment",
+    unit: "Defense",
+    penalty: "5 yards",
+    result: "Repeat Current Down",
+    },
+    {
+    question:"The Running Back grabs the face protection of an oposing player while carrying the football. The foul occured in the field of play.",
+    bothFouls: "N/A",
+    offenseFoul: "N/A",
+    defenseFoul: "Neutral Zone Infraction",
+    unit: "Defense",
+    penalty: "15 yards",
+    result: "Repeat Current Down",
+    }, 
+    {
+    question:"The Running Back grabs the face protection of an oposing player while carrying the football. The foul occured in the field of play.",
+    bothFouls: "Face Mask",
+    offenseFoul: "N/A",
+    defenseFoul: "N/A",
+    unit: "Offense",
+    penalty: "15 yards",
+    result: "Repeat Current Down",
+    }, 
+    {
+    question:"The Cornerback hooks and holds a Wide Receiver's arm after the Quarterback releases the ball. The foul occured in the field of play.",
+    bothFouls: "Pass Interference",
+    offenseFoul: "N/A",
+    defenseFoul: "N/A",
+    unit: "Defense",
+    penalty: "Ball is placed at the spot of the foul",
+    result: "Automatic first down",
+    },
+    {
+    question:"The Cornerback hooks and holds a Wide Receiver's arm after the Quarterback releases the ball. The foul occured in the end zone.",
+    bothFouls: "Pass Interference",
+    offenseFoul: "N/A",
+    defenseFoul: "N/A",
+    unit: "Defense",
+    penalty: "Ball is placed at the 1 yard line",
+    result: "Automatic first down",
+    },
+];
 
 // Shuffle Original Array of Scenarios
 scenarios = scenarios.sort((a, b) => 0.5 - Math.random())
 
-//shuffle array of curDowns (current down)
+//shuffle curDown array (current down)
 curDown = curDown.sort((a, b) => 0.5 - Math.random())
 //console.log for debugging
 console.log(curDown)
@@ -189,15 +328,19 @@ let outField = document.querySelector("#output");
 
 let curField = document.querySelector("#curOutput");
 
+//add "click" eventListener to question button
 questBtn.addEventListener('click', () => {
-    questionIndex++
-    updateUI()
+for (let i = 0; i < array.length; i++) {
+    const element = array[index];
+        questionIndex++
+        updateUI()
+}
 })
 
+//uptdate the h1 tags to show curDown and scenarios array
 function updateUI(){
-    curField.innerText = curDown
-    outField.innerText = scenarios[questionIndex]; // UPDATE: When you change scenarios from string to object => scenarios[questionIndex].question
-    
+    curField.innerText = curDown[questionIndex]
+    outField.innerText = scenarios[questionIndex].question; // UPDATE: When you change scenarios from string to object => scenarios[questionIndex].question    
 }
 
 updateUI()
