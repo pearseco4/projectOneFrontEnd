@@ -1,17 +1,158 @@
 * {
-    text-align: center;
-}
-
-body {
-    display: inline-block;
-}
-
-button {
-    display: inline-block;
-    padding: 10px 2
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
+    font-family: 'Libre Baskerville', serif;
+    ;   
+   } 
+   
+   
+    body {
+       height: 100vh;
+       background-image: url("https://static.vecteezy.com/system/resources/previews/004/279/082/original/superbowl-football-field-background-free-vector.jpg");
+   
+   }
+   
+   .top {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       margin: auto;
+       border: 3px solid black;
+       margin-bottom: 5%;
+       background-color: white;
+       opacity: 0.4;
+   
+   }
+   
+   .drop-downs {
+       display: flex;
+       height: fit-content;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       padding-top: 0%;
+   }
+   
+   form  {
+       display: flex;
+       flex-direction: row;
+       align-items: center;
+       gap: 19px;
+   }
+   
+   
+   .footer {
+       display: flex;
+       flex-direction: column;
+       justify-content:space-around;
+       align-items: center;
+       height: 30%;
+   }
+   
+   /* drop-down options style*/
+   select {
+       width: 200px;
+       height: fit-content;
+       display: inline-block;
+       padding: 15px 25px;
+       font-size: 24px;
+       cursor: pointer;
+       text-align: center;
+       text-decoration: none;
+       outline: none;
+       color: none;
+       background-color: white;
+       border: none;
+       border-radius: 15px;
+       box-shadow: 0 9px #999;
+       justify-content: center;
+   }
+   
+   
+   input {
+       width: fit-content;
+       height: fit-content;
+   }
+   
+   .field {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       margin: auto;
+       width: 600px;
+       height: 330.5px;
+       border: 3px solid black;
+       margin-bottom: 2%;
+       background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/American_Football_Positions.svg/1920px-American_Football_Positions.svg.png);
+       background-size: 100%;
+       
+   }
+   
+   .field-container {
+       display: flex;
+   }
+   
+   .keyImage {
+       height: 150px;
+   }
+   
+   .hide {
+       display: none;
+   }
+   
+   .score {
+       display: flex;
+       padding: 1%;
+       font-size: 40px;
+       height: fit-content;
+       width: fit-content;
+       background-color: antiquewhite;
+   
+   }
+   
+   .winner {
+       padding-right: 7%;
+       font-size: 40px;
+   }
+   
+   h1#output {
+       display: flex;
+       justify-content: center;
+       margin-right: 2%;
+       margin-left: 2%;
+   }
+   
+   input#mySubmitButton {
+       width: 200px;
+       height: fit-content;
+       display: inline-block;
+       padding: 15px 25px;
+       font-size: 24px;
+       cursor: pointer;
+       text-align: center;
+       text-decoration: none;
+       outline: none;
+       color: none;
+       background-color: white;
+       border: none;
+       border-radius: 15px;
+       box-shadow: 0 9px #999;
+       justify-content: center;
+   }
+   
+   button#questBtn {
+       width: 200px;
+       height: fit-content;
+       display: inline-block;
+       padding: 15px 25px;
+       font-size: 24px;
+       cursor: pointer;
+       text-align: center;
+       text-decoration: none;
+       outline: none;
+       color: none;
+       background-color: white;
+       border: none;
+       border-radius: 15px;
+       box-shadow: 0 9px #999;
+       justify-content: center;
+   }
