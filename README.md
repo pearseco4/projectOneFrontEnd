@@ -1,6 +1,6 @@
 # NFL Referee Simulator
 
-Calling all football nerds! This is a simple quiz game that tests your knowledge of American football penalties. The game presents you with various in-game scenarios and asks you to select the correct penalty, the unit charged, the penalty yards, and the result of the play. The game provides feedback on your answers and keeps track of your score.
+This is a simple quiz game that tests your knowledge of American football penalties. The game presents you with various in-game scenarios and asks you to select the correct penalty, the unit charged, the penalty yards, and the result of the play. The game provides feedback on your answers and keeps track of your score.
 
 # Technologies Used
 
