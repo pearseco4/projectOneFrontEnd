@@ -16,6 +16,7 @@ The UI was redesigned using Webflow
 
 <img width="550" alt="Screenshot 2023-06-30 at 1 18 39 PM" src="https://github.com/pearseco4/projectOneFrontEnd/assets/126290848/e9708344-2bbd-43dd-a626-662fe45a8d71">
 
+
 <img width="300" alt="Screenshot 2023-06-30 at 1 48 47 PM" src="https://github.com/pearseco4/projectOneFrontEnd/assets/126290848/9e2d047c-96ab-45a8-b5c4-3efff692bcd6">
 
 <img width="300" alt="Screenshot 2023-06-30 at 1 49 00 PM" src="https://github.com/pearseco4/projectOneFrontEnd/assets/126290848/473b4de2-accb-480a-a2c5-0061668572a9">
@@ -29,6 +30,8 @@ The UI was redesigned using Webflow
 
 To run the game locally, follow these steps:
 
-Clone the repository: git clone <repository-url>
-Navigate to the project directory: cd football-penalty-quiz-game
+Clone down this repository: git clone refereeSimulator
+
+Navigate to the project directory: cd refereeSimulator
+
 Open the index.html file in your web browser.
