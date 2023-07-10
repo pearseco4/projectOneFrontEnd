@@ -30,7 +30,7 @@ The UI was redesigned using Webflow
 
 To run the game locally, follow these steps:
 
-Clone down this repository: git clone refereeSimulator
+Clone down this repository: git clone [refereeSimulator](https://github.com/pearseco4/refereeSimulator.git)
 
 Navigate to the project directory: cd refereeSimulator
 
